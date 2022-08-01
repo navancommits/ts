@@ -7,10 +7,10 @@ type Props = {
 };
 
 export async function getServerSideProps() {
-   let res = await fetch(
+   const res = await fetch(
     "https://catfact.ninja/fact"
    );
-   let data = await res.json() as Props;
+   const data = await res.json() as Props;
   
    return {
      props: {

@@ -1,16 +1,21 @@
 import type { NextPage } from 'next'
 import fetch from 'node-fetch'
 
+interface IProps {
+	fact: string;
+    length: number;
+}
+
 type Props = {
     fact: string;
-    length: string;
+    length: number;
 };
 
 export async function getServerSideProps() {
-   const res = await fetch(
+   let res = await fetch(
     "https://catfact.ninja/fact"
    );
-   const data = await res.json() as Props;
+   let data = await res.json() as IProps;
   
    return {
      props: {

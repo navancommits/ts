@@ -7,29 +7,18 @@ type Props = {
 };
 
 export async function getServerSideProps() {
-    const clientSecret = '1ljIXWDNaFz2fOkhIoSUadu8cTXzm82kES5imCeRu1wQsrv6eEtQA8SXcTcH'; //username of the user logging in
-    const clientID = '8DD363B7-217B-40F8-96F7-EB961136003D'; //clientID of the application the user is logging in to ([sign up for free](https://portal.ordercloud.io/register)
+    const clientID = '4299DFFC-DCA4-4077-BD40-661BB9F96E2F'; //clientID of the application the user is logging in to ([sign up for free](https://portal.ordercloud.io/register)
     const scope:ApiRole[] = ['FullAccess']; //string array of [roles](https://ordercloud.io/knowledge-base/security-profiles) the application has access to
     Configuration.Set({
-        baseApiUrl: "https://sandboxapi.ordercloud.io",
-        clientID: '8DD363B7-217B-40F8-96F7-EB961136003D'
+        baseApiUrl: "https://sandboxapi.ordercloud.io"
     });
+    
+    const authResponse = await Auth.Anonymous(clientID, scope);
+    Tokens.SetAccessToken(authResponse.access_token);    
 
-    Auth.ClientCredentials(clientSecret, clientID, scope)
-        .then(response => {
-            //store token, now any subsequent calls will automatically set this token in the headers for you
-            const token = response.access_token;
-            Tokens.SetAccessToken(token)
-        })
-        .catch(err => console.log(err));
-
-    console.log("success");
-    //let propList: ListPage<Props>= (await Products.List()).Items as ListPage<Props>;
-  
-    //return { props: { prodList: propList } };
     return await {
         props: { productList: await getProducts() },
-        };
+    };
 }
 
 const Home: NextPage<Props> = (props) => {

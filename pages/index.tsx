@@ -23,14 +23,26 @@ export async function getStaticProps() {
 
 const Home: NextPage<Props> = (props) => {
     const prodList = props.productList && (
-        <div>
-            Products:
-            <table>
-                <thead></thead>
+        <div className='content'>
+            <h1>Welcome</h1>
+            <p>My Product List from OrderCloud MarketPlace</p>
+            <table className="container">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Count</th>
+                        <th>Width</th>
+                        <th>Height</th>
+                        <th>Length</th>
+                        <th>Weight</th>
+                    </tr>
+                </thead>
                 <tbody>
+
                     {props.productList.map((prod, index) => (
                         <tr key={index}>
-                            
+
                             <td>{prod.Name}</td>
                             <td>{prod.Description}</td>
                             <td>{prod.SpecCount}</td>
@@ -38,7 +50,7 @@ const Home: NextPage<Props> = (props) => {
                             <td>{prod.ShipHeight}</td>
                             <td>{prod.ShipLength}</td>
                             <td>{prod.ShipWeight}</td>
-                            
+
                         </tr>
                     ))}
                 </tbody>

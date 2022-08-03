@@ -1,0 +1,19 @@
+ thead {
+        width: 100%;
+        text-align:center;
+    }
+    td {
+        text-align: left;
+    }
+    th {
+        background-color: darkred;
+        color:white;
+    }
+table, th, td {
+    border: 1px solid;
+}
+.content {
+    max-width: 1000px;
+    margin: auto;
+}
+    

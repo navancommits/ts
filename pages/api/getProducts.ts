@@ -1,5 +1,4 @@
-import {Products , Product} from 'ordercloud-javascript-sdk';
+import {Products } from 'ordercloud-javascript-sdk';
 
-
-export const getProducts = async () => await (await Products.List()).Items;
+export const getProducts = async () => await (await Products.List({ pageSize: 100 })).Items;
 

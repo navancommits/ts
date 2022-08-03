@@ -1,21 +1,21 @@
 import type { NextPage } from 'next'
 import { getProducts } from './api/getProducts';
-import { ApiRole,Configuration,Auth, Products, Tokens, ListPage, RequiredDeep, Product } from 'ordercloud-javascript-sdk';
+import { ApiRole,Configuration,Auth, Tokens, Product } from 'ordercloud-javascript-sdk';
 
 type Props = {
     productList: Product[];
 };
 
 export async function getStaticProps() {
-    const clientID = '4299DFFC-DCA4-4077-BD40-661BB9F96E2F'; //clientID of the application the user is logging in to ([sign up for free](https://portal.ordercloud.io/register)
-    const scope:ApiRole[] = ['FullAccess']; //string array of [roles](https://ordercloud.io/knowledge-base/security-profiles) the application has access to
+    const clientID = '4299DFFC-DCA4-4077-BD40-661BB9F96E2F'; 
+    const scope:ApiRole[] = ['ProductAdmin'];
     Configuration.Set({
         baseApiUrl: "https://sandboxapi.ordercloud.io"
     });
     
     const authResponse = await Auth.Anonymous(clientID, scope);
-    Tokens.SetAccessToken(authResponse.access_token);    
-
+    Tokens.SetAccessToken(authResponse.access_token);
+    
     return await {
         props: { productList: await getProducts() },
     };

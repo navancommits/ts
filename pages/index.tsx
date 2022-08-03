@@ -6,7 +6,7 @@ type Props = {
     productList: Product[];
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const clientID = '4299DFFC-DCA4-4077-BD40-661BB9F96E2F'; //clientID of the application the user is logging in to ([sign up for free](https://portal.ordercloud.io/register)
     const scope:ApiRole[] = ['FullAccess']; //string array of [roles](https://ordercloud.io/knowledge-base/security-profiles) the application has access to
     Configuration.Set({
